@@ -92,7 +92,11 @@ class Tableau1 extends Phaser.Scene{
             }
 
         }
+        this.obstacles[34].setTintFill(0x83f52c);
+        this.obstacles[35].setTintFill(0xf00020);
     }
+
+
 
 
     Initiale (){
