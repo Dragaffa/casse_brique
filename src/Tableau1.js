@@ -74,7 +74,7 @@ class Tableau1 extends Phaser.Scene{
         this.obstacles = [];
 
         for (let e=0;e<5;e++) {
-            for (let i=0;i<9;i++) {
+            for (let i=0;i<10;i++) {
 
                 brique = this.physics.add.sprite(i * 61 + 120, e * 31 + 200, 'carre')
                 brique.setDisplaySize(60, 30);
