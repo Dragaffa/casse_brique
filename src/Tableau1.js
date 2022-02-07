@@ -46,6 +46,7 @@ class Tableau1 extends Phaser.Scene{
         //this.balle.setVelocityY(Phaser.Math.Between(0, 0));
         this.balle.body.setMaxVelocityX(100)
         this.balle.body.setMaxVelocityY(500)
+
         this.Initiale();
 
         let me = this ;
@@ -64,36 +65,27 @@ class Tableau1 extends Phaser.Scene{
         //console.log(this.joueurGauche)
 
         this.initKeyboard();
+        this.creationBrique()
     }
 
     creationBrique(){
         let me = this;
         let brique;
-        this.obstacles=[];
+        this.obstacles = [];
 
-        /*this.bricks = game.add.group();
-        this.bricks.enableBody = true;
-        for (var i = 0; i < 5; i++)
-            for (var j = 0; j < 5; j++)
-                game.add.sprite(55+i*60, 55+j*35, 'brik', 0, this.bricks);
-        this.bricks.setAll('body.immovable', true);*/
+        for (let e=0;e<5;e++) {
+            for (let i=0;i<10;i++) {
 
-
-
-
-        for(let i=0;i<5;i++){
-            for(let e=0;e<9;e++){
-                game.add.sprite(55+i*60, 55+e*35, 'carre', 0, me.brique);
-                brique.setDisplaySize(60,30);
+                brique = this.physics.add.sprite(i * 61 + 120, e * 31 + 200, 'carre')
+                brique.setDisplaySize(60, 30);
                 brique.body.setAllowGravity(false);
                 brique.setImmovable(true);
 
                 this.obstacles.push(brique);
 
-                this.physics.add.collider(this.balle, brique, function () {
-                    console.log("brique");
-                    me.obstacles[i].setVisible(false);
-                    me.obstacles[i].destroy();
+                this.physics.add.collider(me.balle, brique, function () {
+                        me.obstacles[i+10*e].setVisible(false);
+                        me.obstacles[i+10*e].destroy(true);
 
                 });
 
@@ -112,16 +104,13 @@ class Tableau1 extends Phaser.Scene{
 
         this.balle.setVelocityY(200);
 
+
         this.balle.setVelocityX(0);
 
     }
 
-    win(joueur){
-        //alert('Joueur '+joueur.name+' gagne')
-        joueur.score ++;
-        //alert('Le score est de '+this.joueurGauche.score+' a '+this.joueurDroite.score)
-        this.Initiale();
-    }
+
+
 
 
     rebond(raquette){
@@ -193,11 +182,10 @@ class Tableau1 extends Phaser.Scene{
 
     update(){
 
-        if(this.balle.x>this.largeur){
-            this.win(this.joueurGauche);
-        }
-        if(this.balle.x<0){
-            this.win(this.joueurDroite);
+        if(this.balle.y>this.hauteur){
+            this.balle.setX(this.largeur/2);
+            this.balle.setY(this.hauteur/2);
+            this.balle.setVelocityY(200);
         }
 
         if(this.balle.y < 0){
