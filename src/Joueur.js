@@ -1,4 +1,4 @@
-class Joueur {
+/*class Joueur {
     get score() {
         return this._score;
     }
